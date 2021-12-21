@@ -138,6 +138,7 @@ public class LottoMain {
 					// 2등!!
 				} else if (cont == 6) {
 					// 1등!!
+					com[com.length-1] = "1등 당첨!!";
 				}
 				
 				model.addRow(lotto);
@@ -161,7 +162,7 @@ public class LottoMain {
 
 
 	private Object[] autoLottoNumberCom() {
-		Object com [] = new Object [7]; // 컴퓨터 자동 번호 + 보너스 번호
+		Object com [] = new Object [8]; // 컴퓨터 자동 번호 + 보너스 번호
 		
 		
 		for(int i=0; i<7; i++) {
@@ -181,7 +182,7 @@ public class LottoMain {
 	}
 
 	private Object[] autoLottoNumber() {
-		Object[] lotto = new Object [6]; // 유저 자동 번호.
+		Object[] lotto = new Object [8]; // 유저 자동 번호.
 			for(int i =0; i<6; i++) {
 				lotto[i] = (int)(Math.random()* 45) + 1;
 				
