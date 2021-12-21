@@ -83,7 +83,7 @@ public class StartLotto extends JFrame {
 		no6.setFont(new Font("굴림", Font.BOLD, 15));
 		no6.setBounds(309, 64, 53, 27);
 		contentPane.add(no6);
-		System.out.println("Hello");
+		System.out.println("Bye");
 		JCheckBox no7 = new JCheckBox(" 7");
 		no7.setFont(new Font("굴림", Font.BOLD, 15));
 		no7.setBounds(368, 64, 53, 27);
