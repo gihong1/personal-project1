@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
+
 import edu.java.lotto01.Lotto;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -27,18 +28,35 @@ import java.awt.event.ActionEvent;
 public class StartLotto extends JFrame {
 
 	private JPanel contentPane;
-	
+	private Component parentComponent;
+	private LottoMain mainApp;
 	Set<Integer> myLotto;
 
-	public StartLotto() { 
+	
+	public StartLotto(Component parentComponent, LottoMain mainApp) { 
+		this.parentComponent = parentComponent;
+		this.mainApp = mainApp;
 		this.initialize();
 		this.setVisible(true);
 		
 	}
+	
+	
 	/**
 	 * Launch the application.
 	 */
-
+	public static void showFrame(Component parentComponent, LottoMain mainApp) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StartLotto sLotto = new StartLotto(parentComponent, mainApp);
+					sLotto.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -90,7 +108,7 @@ public class StartLotto extends JFrame {
 			}
 		});
 		btnStart.setFont(new Font("굴림", Font.BOLD, 20));
-		btnStart.setBounds(106, 224, 256, 27);
+		btnStart.setBounds(14, 252, 310, 27);
 		contentPane.add(btnStart);
 		
 		JButton btnCancle = new JButton("취 소");
@@ -100,7 +118,7 @@ public class StartLotto extends JFrame {
 			}
 		});
 		btnCancle.setFont(new Font("굴림", Font.BOLD, 20));
-		btnCancle.setBounds(401, 224, 256, 27);
+		btnCancle.setBounds(353, 252, 310, 27);
 		contentPane.add(btnCancle);
 	}
 
@@ -111,7 +129,8 @@ public class StartLotto extends JFrame {
 		
 		if(myLotto.size() != 6) {
 			myLotto.removeAll(myLotto);
-			JOptionPane.showConfirmDialog(this, "6개만 선택하세요");
+		
+			JOptionPane.showMessageDialog(this, "6개만 선택하세요");
 		}
 			
 		return;

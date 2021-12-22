@@ -68,7 +68,7 @@ public class LottoMain {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 571, 511);
+		frame.setBounds(100, 100, 627, 511);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -76,33 +76,31 @@ public class LottoMain {
 		lblex.setText("<html>1부터 45 사이의 숫자 6가지를 입력하세요!<br>예)<p>본인: [1], [2], [3], [4], [5], [6]<p>컴퓨터: [1], [2], [3], [4], [5], [6] 보너스: [7]<p>결과: 1등 당첨 입니다 축하합니다!!!!!</html> ");
 		lblex.setVerticalAlignment(SwingConstants.TOP);
 		lblex.setFont(new Font("굴림", Font.BOLD, 21));
-		lblex.setBounds(14, 12, 525, 148);
+		lblex.setBounds(14, 12, 590, 135);
 		frame.getContentPane().add(lblex);
 		
 		JButton btnstart = new JButton("수동");
 		btnstart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "수동으로 응모 하시겠습니까?");
+				JOptionPane.showConfirmDialog(frame, "수동으로 응모 하시겠습니까?");
 				startLotto = new StartLotto();
 				int result = table.getSelectedRow();
 				if (result == -1) {
-					
-				
-				
+			
 				return;
 				}
-				
+				StartLotto.showFrame(frame, LottoMain.this);
 				
 			}
 		
 		});
 		btnstart.setFont(new Font("굴림", Font.PLAIN, 25));
-		btnstart.setBounds(14, 182, 160, 67);
+		btnstart.setBounds(14, 182, 185, 67);
 		frame.getContentPane().add(btnstart);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(14, 261, 525, 191);
+		scrollPane.setBounds(14, 261, 583, 191);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable(model);
@@ -113,6 +111,17 @@ public class LottoMain {
 		btnauto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(frame, "자동으로 응모 하시겠습니까?",
+						"자동응모",JOptionPane.YES_NO_OPTION);
+				if (confirm == -1) {
+					System.exit(confirm);
+				} else if (confirm == JOptionPane.YES_OPTION) {
+					// '예'를 선택한 경우
+				} else {
+					// 아니오를 선택한 경우
+				}
+					
+					
 				Object[] lotto = autoLottoNumber();
 				Object[] com = autoLottoNumberCom();
 				int cont = 0;
@@ -124,20 +133,18 @@ public class LottoMain {
 					}
 				}
 				if (cont == 0) {
-					// 다음기회에
-					
+					com[com.length-1] = "다음기회에";
 				} else if (cont == 1) {
-					
+					com[com.length-1] = "다음기회에";
 				} else if (cont == 2) {
-					// 5등!!
+					com[com.length-1] = "5등 당첨!!";
 				} else if (cont == 3) {
-					// 4등!!
+					com[com.length-1] = "4등 당첨!!";
 				} else if (cont == 4) {
-					// 3등!!
+					com[com.length-1] = "3등 당첨!!";
 				} else if (cont == 5) {
-					// 2등!!
+					com[com.length-1] = "2등 당첨!!";
 				} else if (cont == 6) {
-					// 1등!!
 					com[com.length-1] = "1등 당첨!!";
 				}
 				
@@ -150,12 +157,17 @@ public class LottoMain {
 			
 		});
 		btnauto.setFont(new Font("굴림", Font.PLAIN, 25));
-		btnauto.setBounds(188, 182, 160, 67);
+		btnauto.setBounds(213, 182, 185, 67);
 		frame.getContentPane().add(btnauto);
 		
-		JButton btnlist = new JButton("응모 내역");
+		JButton btnlist = new JButton("나가기");
+		btnlist.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnlist.setFont(new Font("굴림", Font.PLAIN, 25));
-		btnlist.setBounds(362, 182, 160, 67);
+		btnlist.setBounds(412, 182, 185, 67);
 		frame.getContentPane().add(btnlist);
 	}
 
