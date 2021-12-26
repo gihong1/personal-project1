@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JCheckBox;
+import javax.swing.Icon;
 import javax.swing.JButton;
 
 
@@ -25,37 +26,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 public class StartLotto extends JFrame {
 
 	private JPanel contentPane;
-	private Component parentComponent;
-	private LottoMain mainApp;
+	private LottoMain lottoMain;
 	Set<Integer> myLotto;
 
 	
-	public StartLotto(Component parentComponent, LottoMain mainApp) { 
-		this.parentComponent = parentComponent;
-		this.mainApp = mainApp;
-		this.initialize();
-		this.setVisible(true);
-		
-	}
-	
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void showFrame(Component parentComponent, LottoMain mainApp) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StartLotto sLotto = new StartLotto(parentComponent, mainApp);
-					sLotto.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public StartLotto(LottoMain lottoMain) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(StartLotto.class.getResource("/images/lotto1.png")));
+		this.lottoMain = lottoMain;
 	}
 
 	/**
@@ -104,7 +85,9 @@ public class StartLotto extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				startgoodluck();
+				
 			}
 		});
 		btnStart.setFont(new Font("굴림", Font.BOLD, 20));
@@ -120,20 +103,25 @@ public class StartLotto extends JFrame {
 		btnCancle.setFont(new Font("굴림", Font.BOLD, 20));
 		btnCancle.setBounds(353, 252, 310, 27);
 		contentPane.add(btnCancle);
+		this.setVisible(true);
 	}
 
 
 	private void startgoodluck() {
 		
-		System.out.println(myLotto.toString());
-		
 		if(myLotto.size() != 6) {
-			myLotto.removeAll(myLotto);
-		
-			JOptionPane.showMessageDialog(this, "6개만 선택하세요");
-		}
+			JOptionPane.showMessageDialog(this, "숫자 6개를 선택하세요.");
+			return;
+		} else  {
+			 int confirm = JOptionPane.showConfirmDialog(this, "정말 응모 하시겠습니까?");
+			 if (confirm == JOptionPane.YES_OPTION) {
+				 
+			 }
 			
-		return;
+		}
+		
+		lottoMain.setModelManually(myLotto.toArray());
+		this.setVisible(false);
 	}
 	
 }
